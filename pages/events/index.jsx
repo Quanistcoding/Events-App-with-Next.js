@@ -7,7 +7,7 @@ export default function ({data}) {
             <div className="events_page">
                 {data.map((event) => (
                     <Link key={event.id} href={`/events/${event.id}`} className="card">
-                            <Image src={event.image} alt={event.title} width={500} height={500} /> 
+                            <Image src={event.image} alt={event.title} width={400} height={400} /> 
                             <h2>{event.title} </h2>
                     </Link>
                 ))}
