@@ -28,20 +28,21 @@ export default function handler(req, res) {
     const { email, eventId } = req.body;
 
     if (!email | !email.includes('@')) {
-      res.status(422).json({ message: 'Invalid email address' });
+      return res.json({ message: 'Invalid email address' });
     }
 
+    const targetEven = allEvents.find(ev => ev.id === eventId);
+
+    if(targetEven.emails_registered.includes(email))
+      return res.send({ message: 'Email already registered' });
+
     const newAllEvents = allEvents.map((ev) => {
-      if (ev.id === eventId) {
-        if (ev.emails_registered.includes(email)) {
-          res.json({ message: 'This email has already been registered' });
-          return ev;
-        }
+      if (ev.id === eventId && !ev.emails_registered.includes(email)) {
         return {
           ...ev,
           emails_registered: [...ev.emails_registered, email],
         };
-      }
+      }      
       return ev;
     });
 

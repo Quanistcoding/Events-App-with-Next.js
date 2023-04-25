@@ -32,7 +32,9 @@ export default function Event({ data }) {
           setMessage(data.message);
           inputEmail.current.value = '';
         } catch (e) {
+            console.dir(e)
           console.log('ERROR', e);
+          setMessage(e.message);
         }
     }
 
